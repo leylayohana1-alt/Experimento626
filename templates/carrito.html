@@ -1,0 +1,70 @@
+<!-- templates/carrito.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito - Dulce Edén</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-container { max-width: 600px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .btn-delete { color: #ff4d4d; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 20px; font-weight: bold; margin-top: 20px; color: #5c3d2e; }
+        .btn-pay { display: block; background: #5c3d2e; color: white; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+        .btn-pay:hover { background: #4a3124; }
+        .btn-clear { display: inline-block; color: #8c7462; text-decoration: none; font-size: 14px; margin-top: 15px; }
+        .btn-clear:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">🍰 Dulce Edén</a>
+        <div class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/menu">Menú</a>
+            <a href="/carrito">🛒 Carrito</a>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h2>🛒 Tu Carrito de Compras</h2>
+
+        {% if carrito %}
+            <!-- Lista de productos agregados -->
+            {% for producto in carrito %}
+            <div class="cart-item">
+                <div>
+                    <span style="font-weight: 500;">{{ producto.nombre }}</span>
+                </div>
+                <div>
+                    <span style="margin-right: 15px; font-weight: bold;">S/. {{ producto.precio }}</span>
+                    <!-- El índice nos ayuda a saber cuál borrar -->
+                    <a href="/eliminar/{{ loop.index0 }}" class="btn-delete">❌ Quitar</a>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Total de la compra -->
+            <div class="cart-total">
+                <span>Total a pagar:</span>
+                <span>S/. {{ total }}</span>
+            </div>
+
+            <!-- Botones de acción -->
+            <a href="/pago_bcp" class="btn-pay">Proceder a pagar con BCP</a>
+            <center><a href="/vaciar" class="btn-clear">Vaciar todo el carrito</a></center>
+
+        {% else %}
+            <!-- Mensaje si no hay nada seleccionado -->
+            <div style="text-align: center; padding: 30px 0;">
+                <p style="color: #666; font-size: 16px;">Tu carrito está vacío. ¡Ve al menú y añade un dulce antojo! 🍩</p>
+                <a href="/menu" class="btn-pay" style="display: inline-block; width: auto; padding: 10px 20px;">Ver el Menú</a>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

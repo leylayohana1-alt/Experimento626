@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dulce Edén</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .login-box { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .form-control { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .btn-login { background: #5c3d2e; color: white; padding: 12px; border: none; border-radius: 6px; width: 100%; font-weight: bold; cursor: pointer; }
+        .btn-login:hover { background: #4a3124; }
+        .error-msg { color: red; margin-bottom: 15px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>🍰 Acceso Administrador</h2>
+        <p>Introduce las credenciales de Dulce Edén</p>
+        
+        {% if error %}
+            <p class="error-msg">⚠️ {{ error }}</p>
+        {% endif %}
+
+        <form action="/login" method="POST">
+            <input type="text" name="usuario" placeholder="Usuario" class="form-control" required>
+            <input type="password" name="clave" placeholder="Contraseña" class="form-control" required>
+            <button type="submit" class="btn-login">Ingresar al Panel</button>
+        </form>
+        <br>
+        <a href="/menu" style="color: #8c7462; text-decoration: none; font-size: 14px;">Volver al Menú Público</a>
+    </div>
+
+</body>
+</html>

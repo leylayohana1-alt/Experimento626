@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Dulce Edén</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ESTILOS PREMIUM PARA ARREGLAR LA VISTA */
+        body {
+            background-color: #fff5f5; /* Fondo dulce sutil */
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* IDENTIDAD DE LA MARCA EN EL TOPE */
+        .brand-header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 5px;
+        }
+        .brand-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #5c3d2e; /* Color chocolate de tu marca */
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* CONFIGURACIÓN DEL CONTENEDOR Y TÍTULO CENTRADO */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+            text-align: center;
+        }
+
+        .menu-container h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #777777;
+            margin: 0 0 40px 0;
+        }
+
+        /* REJILLA PARA MOSTRAR LAS TARJETAS UNA AL LADO DE LA OTRA */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* DISEÑO DE LAS TARJETAS (CARDS) ESTILO INICIO */
+        .menu-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(211, 158, 130, 0.2);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu-card-body {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .menu-card-body h3 {
+            font-size: 1.3rem;
+            color: #4a3b32;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .menu-card-body p {
+            font-size: 0.95rem;
+            color: #777777;
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">🍰 Dulce Edén</a>
+        <div class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/menu">Menú</a>
+            <a href="/carrito">🛒 Carrito</a>
+            <a href="/registro">Registro</a>
+        </div>
+    </nav>
+
+    <!-- IDENTIDAD DE LA MARCA EN EL TOPE DE LA PÁGINA -->
+    <div class="brand-header">
+        <h1>Dulce Edén</h1>
+    </div>
+
+    <div class="menu-container">
+        <!-- TU TÍTULO ORIGINAL CONSERVADO -->
+        <h1>Nuestras Especialidades</h1>
+        
+        <!-- LAS TARJETAS AHORA SE ACOMODAN UNA AL LADO DE LA OTRA -->
+        <div class="menu-grid">
+            
+            <a href="/pasteles" class="menu-card">
+                <img src="https://www.cocinadelirante.com/800x600/filters:format(webp):quality(75)/sites/default/files/images/2023/08/receta-de-pastel-de-chocolate-facil.jpg" alt="Pasteles">
+                <div class="menu-card-body">
+                    <h3>Pasteles</h3>
+                    <p>Explora nuestras tortas artesanales de chocolate, fresa, cumpleaños y bodas.</p>
+                </div>
+            </a>
+
+            <a href="/bebidas" class="menu-card">
+                <img src="https://www.cabucoffee.com/newimages/Guia-Cappuccino.jpg" alt="Bebidas">
+                <div class="menu-card-body">
+                    <h3>Bebidas</h3>
+                    <p>Acompaña tu día con un delicioso Cappuccino o un Café Latte caliente.</p>
+                </div>
+            </a>
+
+            <a href="/panes_dulces" class="menu-card">
+                <img src="https://cdn.vegkit.com/wp-content/uploads/sites/2/2024/02/18160130/berry_muffins_1.jpg" alt="Panes y Dulces">
+                <div class="menu-card-body">
+                    <h3>Panes y Dulces</h3>
+                    <p>Prueba nuestras ricas trufas, muffins y pan fresco de masa madre.</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer style="margin-top: 50px; text-align: center; padding: 20px; border-top: 1px solid #ddd; background-color: #ffffff;">
+        <p style="margin: 0; color: #8c7462; font-size: 14px;">© 2026 Dulce Edén - Todos los derechos reservados.</p>
+        <div style="margin-top: 10px;">
+            <a href="/" style="color: #634832; text-decoration: none; font-size: 14px; margin-right: 15px; font-weight: 500;">Volver al inicio</a>
+            <a href="/admin" style="color: #ba8569; text-decoration: none; font-size: 12px; font-weight: 500;">🔐 Acceso Interno</a>
+        </div>
+    </footer>
+
+</body>
+</html>

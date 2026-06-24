@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Bal Dulce Edén</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/estilos.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🍰 Bal Dulce Edén
+</div>
+
+<nav>
+
+    <a href="/">Inicio</a>
+
+    <a href="/menu">Menú</a>
+
+    <a href="#contacto">Contacto</a>
+
+    <button onclick="mostrarCarrito()"
+    class="carrito-btn">
+
+        🛒 Carrito
+        ({{ session.get('carrito', [])|length }})
+
+    </button>
+
+</nav>
+
+
+</header>
+<div id="panelCarrito" class="panel-carrito">
+
+    <h2>🛒 Mi Carrito</h2>
+
+    {% set total = namespace(valor=0) %}
+
+    {% for producto in session.get('carrito', []) %}
+
+        {% set total.valor = total.valor + producto.precio %}
+
+        <div class="item-carrito">
+
+            {{ producto.nombre }}
+
+            -
+
+            S/. {{ producto.precio }}
+
+            <a href="/eliminar/{{ loop.index0 }}">
+                ❌
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+    <hr>
+
+    <h3>
+
+        Total:
+        S/. {{ total.valor }}
+
+    </h3>
+
+    <h3> Métodos de Pago</h3>
+
+    <p> BCP</p>
+
+        <a href="/vaciar" class="btn-vaciar">
+        Vaciar carrito
+    
+</a>
+
+<br><br>
+
+<a href="/pago_bcp" class="btn-vaciar">
+     Pagar con BCP
+</a>
+
+
+</div>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Los pasteles más deliciosos 🍓
+        </h1>
+
+        <p>
+            Endulzamos tus momentos especiales
+        </p>
+
+        <a href="/menu" class="btn-menu">
+            Ver menú
+        </a>
+
+    </div>
+
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+
+<section class="productos-section">
+
+<h2>Nuestros Productos</h2>
+
+<div class="productos-container">
+
+    <!-- PASTELES -->
+
+    <div class="producto-card">
+
+        <button class="flecha"
+        onclick="cambiarPastel(-1)">
+        ❮
+        </button>
+
+        <img id="imgPastel"
+        src="https://www.cocinadelirante.com/800x600/filters:format(webp):quality(75)/sites/default/files/images/2023/08/receta-de-pastel-de-chocolate-facil.jpg">
+
+        <button class="flecha"
+        onclick="cambiarPastel(1)">
+        ❯
+        </button>
+
+        <div class="producto-info">
+            <h3 id="nombrePastel">
+                Pastel de Chocolate
+            </h3>
+        </div>
+
+    </div>
+
+    <!-- BEBIDAS -->
+
+    <div class="producto-card">
+
+        <button class="flecha"
+        onclick="cambiarBebida(-1)">
+        ❮
+        </button>
+
+        <img id="imgBebida"
+        src="https://www.cuisinart.com/dw/image/v2/ABAF_PRD/on/demandware.static/-/Sites-us-cuisinart-sfra-Library/default/dw42dcae51/images/recipe-Images/cafe-latte1-recipe_resized.jpg">
+
+        <button class="flecha"
+        onclick="cambiarBebida(1)">
+        ❯
+        </button>
+
+        <div class="producto-info">
+            <h3 id="nombreBebida">
+                Café Latte
+            </h3>
+        </div>
+
+    </div>
+
+    <!-- PANES Y DULCES -->
+
+    <div class="producto-card">
+
+        <button class="flecha"
+        onclick="cambiarDulce(-1)">
+        ❮
+        </button>
+
+        <img id="imgDulce"
+        src="https://cdn.vegkit.com/wp-content/uploads/sites/2/2024/02/18160130/berry_muffins_1.jpg">
+
+        <button class="flecha"
+        onclick="cambiarDulce(1)">
+        ❯
+        </button>
+
+        <div class="producto-info">
+            <h3 id="nombreDulce">
+                Muffins
+            </h3>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- CONTACTO -->
+
+<section id="contacto" class="contacto">
+
+    <h2>Contáctanos</h2>
+
+    <p>📞 955250711</p>
+
+    <p>📧 dulceeden@gmail.com</p>
+
+    <p>📍 Av. Principal 123</p>
+
+    <p>🕒 Lunes a Domingo: 8:00 AM - 8:00 PM</p>
+
+    <a
+    href="https://wa.me/51955250711"
+    target="_blank"
+    class="btn">
+
+    💬 ¡Hablemos!
+
+    </a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="main-footer">
+
+    <p>
+        © 2026 Bal Dulce Edén 🍰
+    </p>
+
+</footer>
+
+<script>
+
+const pasteles = [
+
+{
+nombre:"Pastel de Chocolate",
+imagen:"https://www.cocinadelirante.com/800x600/filters:format(webp):quality(75)/sites/default/files/images/2023/08/receta-de-pastel-de-chocolate-facil.jpg"
+},
+
+{
+nombre:"Pastel de Fresa",
+imagen:"https://www.elle-et-vire.com/uploads/cache/930w/uploads/recip/recipe/3779/6377ad3abb209_bra004354-iconic-strawberry-ca.jpg"
+},
+
+{
+nombre:"Pastel de Boda",
+imagen:"https://images.unsplash.com/photo-1623428454614-abaf00244e52"
+}
+
+];
+
+const bebidas = [
+
+{
+nombre:"Café Latte",
+imagen:"https://www.cuisinart.com/dw/image/v2/ABAF_PRD/on/demandware.static/-/Sites-us-cuisinart-sfra-Library/default/dw42dcae51/images/recipe-Images/cafe-latte1-recipe_resized.jpg"
+},
+
+{
+nombre:"Capuccino",
+imagen:"https://www.cabucoffee.com/newimages/Guia-Cappuccino.jpg"
+},
+
+{
+nombre:"Frappuccino",
+imagen:"https://images.unsplash.com/photo-1572490122747-3968b75cc699"
+},
+
+{
+nombre:"Café Helado",
+imagen:"https://images.unsplash.com/photo-1517701604599-bb29b565090c"
+},
+
+{
+nombre:"Licuado de Fresa",
+imagen:"https://images.unsplash.com/photo-1553530666-ba11a7da3888"
+}
+
+];
+
+const dulces = [
+
+{
+nombre:"Muffins",
+imagen:"https://cdn.vegkit.com/wp-content/uploads/sites/2/2024/02/18160130/berry_muffins_1.jpg"
+},
+
+{
+nombre:"Trufas",
+imagen:"https://dulcesperu.com/wp-content/uploads/2025/12/trufas-navidad-1.jpg"
+},
+
+{
+nombre:"Croissant",
+imagen:"https://images.unsplash.com/photo-1555507036-ab1f4038808a"
+},
+
+{
+nombre:"Pan de Masa Madre",
+imagen:"https://veggiefestchicago.org/wp-content/uploads/2025/01/AdobeStock_968234066.jpg"
+}
+
+];
+
+let iPastel = 0;
+let iBebida = 0;
+let iDulce = 0;
+
+function cambiarPastel(n){
+
+iPastel =
+(iPastel + n + pasteles.length)
+% pasteles.length;
+
+document.getElementById("imgPastel").src =
+pasteles[iPastel].imagen;
+
+document.getElementById("nombrePastel").innerHTML =
+pasteles[iPastel].nombre;
+
+}
+
+function cambiarBebida(n){
+
+iBebida =
+(iBebida + n + bebidas.length)
+% bebidas.length;
+
+document.getElementById("imgBebida").src =
+bebidas[iBebida].imagen;
+
+document.getElementById("nombreBebida").innerHTML =
+bebidas[iBebida].nombre;
+
+}
+
+function cambiarDulce(n){
+
+iDulce =
+(iDulce + n + dulces.length)
+% dulces.length;
+
+document.getElementById("imgDulce").src =
+dulces[iDulce].imagen;
+
+document.getElementById("nombreDulce").innerHTML =
+dulces[iDulce].nombre;
+
+}
+
+</script>
+
+<script>
+
+function mostrarCarrito(){
+
+    console.log("clic");
+
+    let panel =
+    document.getElementById("panelCarrito");
+
+    if(panel.style.display=="block"){
+
+        panel.style.display="none";
+
+    }else{
+
+        panel.style.display="block";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

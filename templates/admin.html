@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Dulce Edén</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-box { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .form-control { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;}
+        .btn-add { background: #d39e82; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; }
+        .btn-add:hover { background: #ba8569; }
+        
+        /* Nuevos estilos para los botones del Dashboard de ventas y Logout */
+        .admin-header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px dashed #f1e1d9; }
+        .btn-dashboard-link { background: #5c3d2e; color: white; padding: 10px 18px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.9rem; transition: background 0.3s; }
+        .btn-dashboard-link:hover { background: #452b20; }
+        .btn-logout-link { background: #ff4d4d; color: white; padding: 10px 18px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.9rem; transition: background 0.3s; margin-left: 10px; }
+        .btn-logout-link:hover { background: #cc3b3b; }
+
+        .crud-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .crud-table th, .crud-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        .crud-table th { background-color: #5c3d2e; color: white; }
+        .btn-delete { color: #ff4d4d; text-decoration: none; font-weight: bold; }
+        .btn-delete:hover { text-decoration: underline; }
+        .img-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">🍰 Panel Administrativo</a>
+        <div class="nav-links">
+            <a href="/menu">Ver Menú Público</a>
+            <a href="/admin/dashboard" style="font-weight: bold; color: #d39e82;">📊 Ver Ventas</a>
+            <a href="/logout" style="color: #ff4d4d;">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <div class="admin-box">
+        <div class="admin-header-actions">
+            <h2 style="margin: 0;">✨ Agregar Nuevo Producto</h2>
+            <div>
+                <a href="/admin/dashboard" class="btn-dashboard-link">📊 Ver Dashboard de Ventas</a>
+                <a href="/logout" class="btn-logout-link">🔒 Salir</a>
+            </div>
+        </div>
+
+        <form action="/admin/crear" method="POST">
+            <label>Categoría del Producto:</label>
+            <select name="categoria" class="form-control" required>
+                <option value="pasteles">Pasteles</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="panes_dulces">Panes y Dulces</option>
+            </select>
+
+            <input type="text" name="nombre" placeholder="Nombre del producto (Ej: Torta de Tres Leches)" class="form-control" required>
+            <input type="number" step="0.1" name="precio" placeholder="Precio (S/.)" class="form-control" required>
+            
+            <input type="number" name="stock" placeholder="Cantidad en Stock Inicial (Ej: 15)" class="form-control" min="1" required>
+            
+            <input type="url" name="imagen" placeholder="Enlace URL de la Imagen" class="form-control" required>
+            
+            <button type="submit" class="btn-add">Guardar Producto en el Menú</button>
+        </form>
+    </div>
+
+    <div class="admin-box">
+        <h2>📊 Inventario de Productos</h2>
+        
+        {% for categoria, lista in productos.items() %}
+            <h3 style="text-transform: uppercase; color: #5c3d2e; margin-top: 30px;">📂 {{ categoria.replace('_', ' ') }}</h3>
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock Inicial</th> <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in lista %}
+                    <tr>
+                        <td><img src="{{ p.imagen }}" class="img-preview" alt=""></td>
+                        <td>{{ p.nombre }}</td>
+                        <td>S/. {{ p.precio }}</td>
+                        <td style="font-weight: bold; color: #5c3d2e;">{{ p.get('stock', 10) }} und.</td> <td>
+                            <a href="/admin/eliminar/{{ categoria }}/{{ p.id }}" class="btn-delete" onclick="return confirm('¿Seguro que quieres quitar este producto?')">❌ Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

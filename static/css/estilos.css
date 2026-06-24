@@ -1,0 +1,588 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#fff3f7;
+}
+
+header{
+    background:#ff4fa3;
+    color:white;
+    padding:20px 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:18px;
+}
+
+nav a:hover{
+    text-decoration:underline;
+}
+
+/* --- SECCIÓN PRINCIPAL CON IMAGEN DE FONDO --- */
+/* --- SECCIÓN PRINCIPAL CON IMAGEN DE FONDO --- */
+.hero {
+    /* Imagen de pastelería libre que sí permite enlaces directos */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                     url('https://images.pexels.com/photos/1191639/pexels-photo-1191639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1%27');
+    
+    /* Propiedades de ajuste perfecto para el fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Tamaño en pantalla */
+    width: 100%;
+    height: 85vh; 
+    
+    /* Centrado del texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+/* --- ESTILOS DEL TEXTO INTERIOR --- */
+.hero-content {
+    color: #ffffff !important;
+    font-family: 'Arial', sans-serif;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra para resaltar sobre el fondo */
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 35px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* --- BOTÓN ROSA --- */
+.btn-menu {
+    background-color: #ff4fa3;
+    color: #ffffff !important;
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px; /* Bordes redondeados elegantes */
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 79, 163, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-menu:hover {
+    background-color: #e03b8b;
+    transform: translateY(-2px); /* Pequeño efecto de salto al pasar el mouse */
+}
+/* --- SECCIÓN NUESTROS PRODUCTOS --- */
+.productos-section {
+    background-color: #fff3f7; /* Fondo rosa muy clarito */
+    padding: 60px 20px 80px 20px;
+    text-align: center;
+}
+
+.productos-section h2 {
+    font-size: 36px;
+    font-family: 'Arial', sans-serif;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* Contenedor de las tarjetas */
+.productos-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* Estilo para la tarjeta con contenedor blanco */
+.producto-card {
+    background-color: #ffffff; /* Fondo blanco de la tarjeta */
+    width: 340px;
+    border-radius: 20px; /* Bordes redondeados en toda la tarjeta */
+    overflow: hidden; /* Corta la imagen para que respete las esquinas redondeadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    transition: transform 0.3s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Control de las imágenes dentro de la tarjeta */
+.producto-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block; /* Elimina espacios vacíos rebeldes debajo de la imagen */
+}
+
+/* Bloque de texto inferior */
+.producto-info {
+    padding: 20px 10px;
+    background-color: #ffffff;
+}
+
+/* Texto de los productos en ROSITA */
+.producto-card h3 {
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #ff4fa3; /* Color rosita idéntico al de tu botón */
+    font-weight: bold;
+    margin: 0;
+}
+
+/* --- PIE DE PÁGINA (FOOTER) ROSITA --- */
+.main-footer {
+    background-color: #ff4fa3; /* Fondo rosa brillante */
+    color: #ffffff; /* Texto blanco */
+    text-align: center;
+    padding: 25px 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+.carrito-btn{
+    background:white;
+    color:#ff4fa3 !important;
+    padding:10px 18px;
+    border-radius:25px;
+    font-weight:bold;
+    text-decoration:none;
+    margin-left:15px;
+}
+
+.carrito-btn:hover{
+    transform:scale(1.05);
+}
+
+.contacto{
+    background:#fff3f7;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.contacto h2{
+    color:#ff4fa3;
+    font-size:40px;
+}
+
+.contacto p{
+    font-size:18px;
+    margin:10px 0;
+}
+
+.flecha{
+    background:#ff4fa3;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:50%;
+    cursor:pointer;
+    margin:10px;
+    font-size:18px;
+}
+
+.flecha:hover{
+    background:#ff2d91;
+}
+
+.panel-carrito{
+
+display:none;
+
+position:fixed;
+
+top:90px;
+right:20px;
+
+width:350px;
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 0 15px rgba(0,0,0,.3);
+
+z-index:9999;
+
+max-height:500px;
+
+overflow-y:auto;
+
+}
+
+.item-carrito{
+
+padding:8px;
+
+border-bottom:1px solid #ddd;
+
+}
+
+.item-carrito a{
+
+color:red;
+
+text-decoration:none;
+
+margin-left:10px;
+
+font-weight:bold;
+
+}
+
+.btn-vaciar{
+
+display:block;
+
+background:#ff4fa3;
+
+color:white;
+
+padding:10px;
+
+text-align:center;
+
+border-radius:10px;
+
+text-decoration:none;
+
+margin-top:15px;
+
+}
+
+.carrito-btn{
+
+background:#ff4fa3;
+
+color:white;
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+/* PANEL CARRITO */
+
+.panel-carrito{
+
+    display:none;
+
+    position:fixed;
+
+    top:90px;
+
+    right:20px;
+
+    width:350px;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 15px rgba(0,0,0,.3);
+
+    z-index:9999;
+
+    max-height:500px;
+
+    overflow-y:auto;
+
+}
+
+.item-carrito{
+
+    padding:10px 0;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+.item-carrito a{
+
+    color:red;
+
+    text-decoration:none;
+
+    margin-left:10px;
+
+    font-weight:bold;
+
+}
+
+.btn-vaciar{
+
+    display:block;
+
+    background:#ff4fa3;
+
+    color:white;
+
+    padding:10px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    margin-top:15px;
+
+}
+
+.btn-vaciar:hover{
+
+    background:#ff2d91;
+
+}
+
+.carrito-btn{
+
+    background:white;
+
+    color:#ff4fa3;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+/* ===== CARRITO DESPLEGABLE ===== */
+
+.panel-carrito{
+
+    display:none;
+
+    position:fixed;
+
+    top:90px;
+
+    right:20px;
+
+    width:350px;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 15px rgba(0,0,0,.3);
+
+    z-index:9999;
+
+    max-height:500px;
+
+    overflow-y:auto;
+
+}
+
+.item-carrito{
+
+    padding:10px 0;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+.item-carrito a{
+
+    color:red;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    margin-left:10px;
+
+}
+
+.btn-vaciar{
+
+    display:block;
+
+    margin-top:15px;
+
+    background:#ff4fa3;
+
+    color:white;
+
+    text-align:center;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+}
+
+.btn-vaciar:hover{
+
+    background:#ff2d91;
+
+}
+
+.carrito-btn{
+
+    background:white;
+
+    color:#ff4fa3;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+/* static/css/estilos.css */
+
+/* Configuración general y fondo elegante */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff5f5; /* Un tono crema/rosado muy suave de pastelería */
+    margin: 0;
+    padding: 0;
+    color: #4a3728; /* Marrón chocolate suave para los textos */
+}
+
+/* Barra de navegación superior */
+.navbar {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d39e82;
+    text-decoration: none;
+}
+
+.navbar .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #634832;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+    color: #d39e82;
+}
+
+/* Contenedor del Menú */
+.menu-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.menu-container h1 {
+    font-size: 36px;
+    color: #5c3d2e;
+    margin-bottom: 30px;
+}
+
+/* Cuadrícula o Grid de tarjetas */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Estilo de los cuadros (Tarjetas de categorías) */
+.menu-card {
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Efecto al pasar el mouse por encima del cuadro */
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(211, 158, 130, 0.2);
+}
+
+/* Imagen de la tarjeta */
+.menu-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; /* Hace que la imagen se adapte al cuadro sin deformarse */
+}
+
+/* Texto dentro del cuadro */
+.menu-card-body {
+    padding: 20px;
+}
+
+.menu-card-body h3 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    color: #5c3d2e;
+    text-transform: capitalize;
+}
+
+.menu-card-body p {
+    margin: 0;
+    color: #8c7462;
+    font-size: 14px;
+}

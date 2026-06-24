@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Privado de Ventas - Dulce Edén</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🍰 Panel de Control General</span>
+            <div>
+                <a href="/admin" class="btn btn-outline-light btn-sm me-2">Volver a Inventario (CRUD)</a>
+                <a href="/logout" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mb-4 text-center">Dashboard General de Productos</h1>
+
+        <div class="row mb-4 text-center">
+            <div class="col-md-3 mb-2">
+                <div class="card text-white bg-primary shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Inicial Total</h5>
+                        <p class="card-text fs-3 fw-bold">{{ total_productos }}</p> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-2">
+                <div class="card text-white bg-success shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos Vendidos</h5>
+                        <p class="card-text fs-3 fw-bold">{{ total_vendidos }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-2">
+                <div class="card text-white bg-warning text-dark shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Restante (Sobran)</h5>
+                        <p class="card-text fs-3 fw-bold">{{ stock_restante }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-2">
+                <div class="card text-white bg-info text-dark shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Ingresos</h5>
+                        <p class="card-text fs-3 fw-bold">S/. {{ ingresos }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto bg-white p-4 rounded shadow-sm">
+                <h4 class="text-center mb-3">📊 Ventas por Producto</h4>
+                {% if productos %}
+                    <canvas id="graficaVentas"></canvas>
+                {% else %}
+                    <p class="text-muted text-center my-4">Aún no hay compras para graficar en este momento.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 mx-auto bg-white p-4 rounded shadow-sm mb-5">
+                <h4 class="text-center mb-3">📋 Control Detallado de Stock e Inventario</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre del Producto</th>
+                                <th>Stock Inicial</th>
+                                <th>Unidades Vendidas</th>
+                                <th>Stock Disponible (Sobran)</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in inventario %}
+                            <tr>
+                                <td class="text-start fw-bold">{{ item.nombre }}</td>
+                                <td class="text-muted">{{ item.inicial }}</td>
+                                <td class="text-danger fw-bold">{{ item.vendidos }}</td>
+                                <td class="text-success fs-5 fw-bold">{{ item.restante }}</td>
+                                <td>
+                                    {% if item.restante == 0 %}
+                                        <span class="badge bg-danger">🚨 Agotado</span>
+                                    {% elif item.restante <= 3 %}
+                                        <span class="badge bg-warning text-dark">⚠️ Por Agotarse</span>
+                                    {% else %}
+                                        <span class="badge bg-success">✅ Disponible</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="datos-grafica" 
+         data-nombres='{{ productos.keys() | list | tojson }}' 
+         data-valores='{{ productos.values() | list | tojson }}'>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Leemos las variables desde el contenedor de forma segura e higiénica
+        const contenedor = document.getElementById('datos-grafica');
+        const nombresProductos = JSON.parse(contenedor.getAttribute('data-nombres') || "[]");
+        const cantidadesProductos = JSON.parse(contenedor.getAttribute('data-valores') || "[]");
+
+        // Si existen ventas reales, renderizamos la gráfica sin errores de comas
+        if (nombresProductos.length > 0) {
+            const ctx = document.getElementById('graficaVentas').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar', 
+                data: {
+                    labels: nombresProductos, 
+                    datasets: [{
+                        label: 'Cantidad de Unidades Vendidas',
+                        data: cantidadesProductos, 
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

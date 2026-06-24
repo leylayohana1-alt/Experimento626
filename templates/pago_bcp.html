@@ -1,0 +1,184 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pago BCP - Dulce Edén</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f6fa;
+}
+
+.header{
+    background:#0033A0;
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.contenedor{
+    max-width:900px;
+    margin:40px auto;
+    display:flex;
+    gap:30px;
+}
+
+.resumen{
+    flex:1;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.pago{
+    flex:1;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#0033A0;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.fila{
+    display:flex;
+    gap:15px;
+}
+
+.btn-pagar{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    background:#0033A0;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.btn-pagar:hover{
+    background:#00257a;
+}
+
+.logo-tarjetas{
+    margin-top:20px;
+    text-align:center;
+    font-size:30px;
+}
+
+.total{
+    font-size:28px;
+    color:#0033A0;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+🏦 Pago Seguro BCP
+</div>
+
+<div class="contenedor">
+
+<div class="resumen">
+
+<h2>Resumen de compra</h2>
+
+<p>Pasteles y productos seleccionados</p>
+
+<hr>
+
+<p>Total a pagar:</p>
+
+<div class="total">
+S/. {{ total }}
+</div>
+
+</div>
+
+<div class="pago">
+
+<h2>Datos de la tarjeta</h2>
+
+<form action="/procesar_pago" method="POST">
+
+<label>Número de tarjeta</label>
+<input
+type="text"
+placeholder="1234 5678 9012 3456"
+required>
+
+<label>Nombre del titular</label>
+<input
+type="text"
+placeholder="Nombre completo"
+required>
+
+<div class="fila">
+
+<div>
+<label>Vencimiento</label>
+<input
+type="text"
+placeholder="MM/AA"
+required>
+</div>
+
+<div>
+<label>CVV</label>
+<input
+type="password"
+placeholder="123"
+required>
+</div>
+
+</div>
+
+<button
+type="submit"
+class="btn-pagar">
+
+Pagar Ahora
+
+</button>
+
+</form>
+
+<div class="logo-tarjetas">
+💳 Visa &nbsp;&nbsp; 💳 Mastercard
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+```
